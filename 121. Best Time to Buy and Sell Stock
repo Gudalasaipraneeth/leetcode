@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=study-plan-v2&envId=top-interview-150
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max=0;
+        int low = prices[0];
+        for( int i =1;i<prices.length;i++){
+            if(low>prices[i]){
+                low =prices[i];
+            }
+            if(max<prices[i]-low){
+                max=prices[i]-low;
+            }
+        }
+        return max;
+    }
+}
