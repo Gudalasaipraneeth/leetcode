@@ -1,0 +1,13 @@
+    def rotate(self, nums: List[int], k: int) -> None:
+        k = k % len(nums)  # Handle cases where k > len(nums)
+        
+        def reverse(l, r):
+            while l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+                r -= 1
+        
+        reverse(0, len(nums) - 1)  # Reverse the entire array
+        reverse(0, k - 1)  # Reverse the first k elements
+        reverse(k, len(nums) - 1)  # Reverse the remaining part
+#https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150
