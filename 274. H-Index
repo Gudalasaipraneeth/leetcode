@@ -1,0 +1,30 @@
+class Solution {
+    public static boolean isPossible(int h,int arr[]){
+        int cnt=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>=h) cnt++;
+        }
+        if(cnt>=h) return true;
+        return false;
+    }
+    public int hIndex(int[] citations) {
+        int n=citations.length;
+        int ind=-1;
+        // if(n==1){
+        //     if(citations[0]==1) return 1;
+        //     if(citations[0]==0) return 0;
+        //     return 1;
+        // }
+        int low=0;
+        int high=n;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(isPossible(mid,citations)==true){
+                ind=mid;
+                low=mid+1;
+            }
+            else high=mid-1;
+        }
+        return ind;
+    }
+}
