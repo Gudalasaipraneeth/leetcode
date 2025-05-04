@@ -1,0 +1,38 @@
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || left == right) return head;
+
+        ListNode prev = null;
+        ListNode curr = head;
+        int count = 1;
+
+        // Traverse to the node at position 'left'
+        for (int i = 1; i < left; i++) {
+            prev = curr;
+            curr = curr.next;
+        }
+
+        ListNode before = prev;     // Node before reversal section
+        ListNode midHead = curr;    // Will become the tail of reversed part
+        prev = null;
+
+        // Reverse sublist from left to right
+        for (int i = 0; i <= right - left; i++) {
+            ListNode nextn = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextn;
+        }
+
+        // Reconnect the reversed sublist
+        if (before != null) {
+            before.next = prev;     // Connect node before left to reversed head
+        } else {
+            head = prev;            // If left == 1, update head
+        }
+
+        midHead.next = curr;        // Connect tail of reversed to the rest
+
+        return head;
+    }
+}
