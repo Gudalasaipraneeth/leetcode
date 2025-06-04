@@ -1,0 +1,32 @@
+  public static int getDistance(int[] space){
+      int dist=Integer.MAX_VALUE;
+      int seenPerson =-1;
+      int seenCake=-1;
+      
+      for(int i =0;i<space.length;i++){
+          int newDist= Integer.MAX_VALUE;
+          if(space[i]==1){
+              if(seenCake!=-1){
+                   newDist= Math.abs(seenCake-i)-1;
+              }
+              else{
+                  seenPerson=i;
+              }
+          }
+          else if(space[i]==2){
+                  if(seenPerson!=-1){
+                   newDist= Math.abs(seenPerson-i)-1;
+              }
+              else{
+                  seenCake=i;
+              }
+          }
+          dist=(newDist<dist)? newDist:dist;
+          
+          
+      }
+      if(dist==Integer.MAX_VALUE){
+          return -1;
+      }
+      return dist;
+  }
