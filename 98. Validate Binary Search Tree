@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if( root ==null)
+        return true;
+        Deque<TreeNode> st = new LinkedList<>();
+        TreeNode curr= root;
+        int prev=Integer.MIN_VALUE;
+        int c=0;
+        while(!st.isEmpty() || curr != null){
+            while(curr!=null){
+                st.push(curr);
+                curr= curr.left;
+            }
+            curr= st.pop();
+            if(prev>=curr.val&&c!=0)
+            return false;
+            prev=curr.val;
+            c=1;
+            curr= curr.right;
+
+        }
+        return true;
+    }
+}
