@@ -1,0 +1,37 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<>();
+        if(digits==null || digits.isEmpty())
+        return result;
+        String[] map={
+            "",    // 0
+            "",    // 1
+            "abc", // 2
+            "def", // 3
+            "ghi", // 4
+            "jkl", // 5
+            "mno", // 6
+            "pqrs",// 7
+            "tuv", // 8
+            "wxyz" // 9
+        };
+        backtrack(new StringBuilder(), 0, digits, result, map);
+        return result;
+    }
+
+
+    public void backtrack(StringBuilder curr, int i, String digits, List<String> result, String[] map){
+        if(curr.length()==digits.length()){
+            result.add(curr.toString());
+            return;
+        }
+        int digit= digits.charAt(i)-'0';
+        String digitStr= map[digit];
+        for(int j=0;j<digitStr.length();j++){
+            curr.append(digitStr.charAt(j));
+            backtrack(curr, i+1, digits, result, map);
+            curr.deleteCharAt(curr.length()-1);
+        }
+
+    }
+}
