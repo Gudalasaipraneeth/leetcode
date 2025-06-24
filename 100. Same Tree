@@ -5,7 +5,8 @@ class Solution {
             return true;
         }
         
-        // Base case 2: One node is null and the other is not, trees are not the same
+        // Base case 2: One node is null and 
+//the other is not, trees are not the same
         if (p == null || q == null) {
             return false;
         }
