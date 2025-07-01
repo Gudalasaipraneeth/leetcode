@@ -16,7 +16,7 @@ class Solution {
             return false;
         }
         
-        // Recursively check the left and right subtrees
+        // Recursively check the left and right subtrees of root
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }
