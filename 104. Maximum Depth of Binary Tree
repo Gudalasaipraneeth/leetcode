@@ -29,7 +29,7 @@ class Solution {
                 if(node.right!=null)
                 q.offer(node.right);
             }
-            depth++;
+            depth++; //increment depth
 
         }
         return depth;
