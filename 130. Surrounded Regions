@@ -31,7 +31,7 @@ class Solution {
     }
 
     public void bfs(char[][] board, int i, int j, int n, int m){
-        Deque<int[]> q= new LinkedList<>();
+        Deque<int[]> q= new LinkedList<>(); //double ended queue
         q.offer(new int[]{i,j});
         while(!q.isEmpty()){
             int[] arr= q.poll();
