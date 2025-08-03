@@ -17,8 +17,6 @@ class Solution {
                 current.right = current.left;
                 current.left = null;
             }
-
-            // Move to the next node in the list
             current = current.right;
         }
     }
