@@ -1,3 +1,33 @@
+import java.util.*;
+
+public class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k <= 0) return new int[0];
+
+        // Frequency map: number -> frequency
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : nums) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            minHeap.offer(new int[]{entry.getValue(), entry.getKey()});
+            if (minHeap.size() > k) {
+                minHeap.poll(); // remove least frequent
+            }
+        }
+
+        // Extract results from heap
+        int[] result = new int[k];
+        for (int i = k - 1; i >= 0; i--) {
+            result[i] = minHeap.poll()[1]; 
+        }
+
+        return result;
+    }
+}
 public int[] topKFrequent(int[] nums, int k) {
     Map<Integer, Integer> map = new HashMap<>();
     for (int i = 0; i < nums.length; i++) {
