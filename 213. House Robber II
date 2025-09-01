@@ -1,0 +1,22 @@
+class Solution {
+    public int rob(int[] nums) {
+        int n =nums.length;
+        if(n==1){
+            return nums[0];
+        }
+        int case1=calculate(nums, 0, n-1);
+        int case2= calculate(nums, 1, n);
+        return Math.max(case1, case2);
+    }
+
+    public int calculate(int[] nums, int start, int n){
+        int rob1=0,rob2=0;
+        // [rob1, rob2, i, i+1]
+        for(int i=start; i<n;i++){
+            int temp=rob2;
+            rob2=Math.max(nums[i]+rob1, rob2);
+            rob1=temp;
+        }
+        return rob2;
+    }
+}
