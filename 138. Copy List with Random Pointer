@@ -1,36 +1,33 @@
-/*
-// Definition for a Node.
-class Node {
-    int val;
-    Node next;
-    Node random;
-
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
-    }
-}
-*/
-
 class Solution {
     public Node copyRandomList(Node head) {
-        Map<Node, Node> map= new HashMap<>();
+        if (head == null) return null;
+
+        // 1) Interleave cloned nodes after each original node
         Node curr = head;
-        while(curr!=null){
-            map.put(curr, new Node(curr.val));
-            curr= curr.next;
+        while (curr != null) {
+            Node copy = new Node(curr.val);
+            copy.next = curr.next;
+            curr.next = copy;
+            curr = copy.next;
         }
 
-        curr= head;
-        Node dummy= new Node(0);
-        while(curr!=null){
-            dummy=map.get(curr);
-            dummy.next= map.get(curr.next);
-            dummy.random=map.get(curr.random);
-            curr=curr.next;
-
+        // 2) Set random for cloned nodes
+        curr = head;
+        while (curr != null) {
+            Node copy = curr.next;
+            copy.random = (curr.random != null) ? curr.random.next : null;
+            curr = copy.next;
         }
-        return map.get(head);
+
+        // 3) Unweave into original and copied lists
+        curr = head;
+        Node pseudoHead = head.next;
+        while (curr != null) {
+            Node copy = curr.next;
+            curr.next = copy.next;                // restore original next
+            copy.next = (copy.next != null) ? copy.next.next : null; // link copy→copy
+            curr = curr.next;
+        }
+        return pseudoHead;
     }
 }
