@@ -1,0 +1,26 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        res= []
+        curr=[]
+        self.backtrack(s, res, 0, curr)
+        return res
+    
+    def backtrack (self, s:str, res:List[str], index:int, curr:List[str])->List[str]:
+        if len(curr)== 4 and index==len(s):
+            res.append(".".join(curr))
+            return res
+        
+        if len(curr) >4: return
+
+        # for (int i=1;i<=3 && i<3+len();i++)
+        for i in range (1, 4):
+            if index + i > len(s):
+                break
+            if(i<=3):
+                substr =s[index:index+i]
+                if (substr.startswith("0") and len(substr)>1 )or int(substr)> 255:
+                    continue
+                
+                curr.append(substr)
+                self.backtrack(s, res, i+index, curr)
+                curr.pop()
