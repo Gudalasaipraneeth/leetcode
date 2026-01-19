@@ -1,0 +1,21 @@
+class Solution:
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        if len(hand)%groupSize !=0:
+            return False
+        freq={}
+        for i in hand:
+            freq[i]= freq.get(i,0)+1
+        
+        for i in sorted(freq):
+            while freq.get(i, 0) > 0:
+                for k in range(groupSize):
+                    j=k+i
+                    if j not in freq or freq[j] == 0:
+                        return False
+                    freq[j]-=1
+                    if freq[j]==0:
+                        del freq[j]
+        return True
+
+
+        
