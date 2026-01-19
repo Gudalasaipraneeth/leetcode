@@ -1,0 +1,21 @@
+class Solution:
+    def reorganizeString(self, s: str) -> str:
+        dicts={}
+        for i in s:
+            dicts[i]= dicts.get(i,0)+1
+
+        heap=[(-count,char) for char, count in dicts.items()]
+        heapq.heapify(heap)
+        res=""
+        prev_count, prev_char=0, ""
+        while heap:
+            count, char= heapq.heappop(heap)
+            res+=char
+            if prev_count<0:
+                heapq.heappush(heap,(prev_count, prev_char))
+            count+=1
+            prev_count=count
+            prev_char=char
+        if prev_count!=0:
+            return ""
+        return res
